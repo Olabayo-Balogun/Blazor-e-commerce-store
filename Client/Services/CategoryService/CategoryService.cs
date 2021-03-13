@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace AyacOnlineStore.Client.Services.CategoryService
@@ -9,17 +11,16 @@ namespace AyacOnlineStore.Client.Services.CategoryService
     public class CategoryService : ICategoryService
     {
         public List<Category> Categories { get; set; } = new List<Category>();
+        public HttpClient _http { get; }
 
-        public void LoadCategories()
+        public CategoryService(HttpClient http)
         {
-            Categories = new List<Category>
-            {
-               new Category { Id = 1, Name = "Cereals", Url = "cereals", Icon = "cereals" },
-               new Category { Id = 2, Name = "Fruits", Url = "fruits", Icon = "fruits" },
-               new Category { Id = 3, Name = "Oils", Url = "oils", Icon = "oils" },
-               new Category { Id = 4, Name = "Poultry", Url = "poultry", Icon = "poultry" },
-               new Category { Id = 5, Name = "Vegetables", Url = "vegetables", Icon = "vegetables" }
-            };
+            _http = http;
+        }
+
+        public async Task LoadCategories()
+        {
+            Categories = await _http.GetFromJsonAsync<List<Category>>("api/Category");
         }
     }
 }
