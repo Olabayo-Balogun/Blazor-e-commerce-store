@@ -29,7 +29,7 @@ namespace AyacOnlineStore.Client.Services.ProductService
                new Product
                {
                    Id = 2,
-                   CategoryId = 3,
+                   CategoryId = 1,
                    Title = "Corn",
                    Description = "Fresh corn sourced directly from farmers in order to provide you with high quality at a price you love.  Fun fact; corn is one of the top three most consumed crop in the world",
                    Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYYVJEFeOlfYCHaynRROL_MLI2AbF1Aa4aUw&usqp=CAU",
@@ -53,7 +53,7 @@ namespace AyacOnlineStore.Client.Services.ProductService
                new Product
                {
                    Id = 4,
-                   CategoryId = 1,
+                   CategoryId = 3,
                    Title = "Palm Oil",
                    Description = "Fresh palm oil sourced directly from farmers in order to provide you with high quality at a price you love.",
                    Image = "https://i2.wp.com/eatwellabi.com/wp-content/uploads/2020/08/palm-oil-4.jpg?resize=725%2C900&ssl=1",
@@ -65,7 +65,7 @@ namespace AyacOnlineStore.Client.Services.ProductService
                 new Product
                 {
                     Id = 5,
-                    CategoryId = 1,
+                    CategoryId = 5,
                     Title = "Pepper",
                     Description = "Fresh pepper sourced directly from farmers in order to provide you with high quality at a price you love.  Fun fact; pepper isn't a vegetable, botanists acknowledge pepper as a fruit because of the location of its seed",
                     Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYdRaqkMUhc4WxHJcT0c9JRCfmdvWpdJUCOQ&usqp=CAU",
@@ -89,7 +89,7 @@ namespace AyacOnlineStore.Client.Services.ProductService
                 new Product
                 {
                     Id = 7,
-                    CategoryId = 3,
+                    CategoryId = 1,
                     Title = "Rice",
                     Description = "Fresh rice sourced directly from farmers in order to provide you with high quality at a price you love.  Fun fact; rice is one of the top three most consumed crop in the world",
                     Image = "https://m.economictimes.com/thumb/msid-75184562,width-1200,height-900,resizemode-4,imgsize-414299/rice.jpg",
@@ -113,7 +113,7 @@ namespace AyacOnlineStore.Client.Services.ProductService
                  new Product
                  {
                      Id = 9,
-                     CategoryId = 1,
+                     CategoryId = 5,
                      Title = "Tomatoes",
                      Description = "Fresh Tomatoes sourced directly from farmers in order to provide you with high quality at a price you love. Fun fact; tomatoes isn't a vegetable, botanists acknowledge pepper as a fruit because of the location of its seed",
                      Image = "https://media.istockphoto.com/photos/tomato-isolated-tomato-on-white-background-with-clipping-path-full-picture-id941825808?k=6&m=941825808&s=612x612&w=0&h=zMkokhq3w7fN5xYeiTX27c6TICJ53ZvZg9AY2LNgw_0=",
@@ -125,7 +125,7 @@ namespace AyacOnlineStore.Client.Services.ProductService
                  new Product
                {
                    Id = 10,
-                   CategoryId = 1,
+                   CategoryId = 3,
                    Title = "Vegetable Oil",
                    Description = "Fresh groundnut oil sourced directly from farmers in order to provide you with high quality at a price you love.",
                    Image = "https://www.goldenpeanut.com/Images/OurProducts/PeanutOil/Extract.png",
