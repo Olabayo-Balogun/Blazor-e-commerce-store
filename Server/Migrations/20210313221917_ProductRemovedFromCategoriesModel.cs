@@ -2,7 +2,7 @@
 
 namespace AyacOnlineStore.Server.Migrations
 {
-    public partial class ProductsRemovedFromCategoryModel : Migration
+    public partial class ProductRemovedFromCategoriesModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

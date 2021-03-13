@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AyacOnlineStore.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210313220110_ProductsRemovedFromCategoryModel")]
-    partial class ProductsRemovedFromCategoryModel
+    [Migration("20210313221917_ProductRemovedFromCategoriesModel")]
+    partial class ProductRemovedFromCategoriesModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
