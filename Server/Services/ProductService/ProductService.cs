@@ -20,9 +20,10 @@ namespace AyacOnlineStore.Server.Services.ProductService
             return Products;
         }
 
-        public async Task<List<Product>> GetProduct (int id)
+        public async Task<Product> GetProduct (int id)
         {
-            throw new NotImplementedException();
+            Product product = Products.FirstOrDefault(p => p.Id == id);
+            return product; 
         }
 
         public async Task<List<Product>> GetProductsByCategory(string categoryUrl)
