@@ -20,9 +20,16 @@ namespace AyacOnlineStore.Server.Controllers
             _productService = productService;
         }
 
+        [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAllProducts()
         {
             return Ok(await _productService.GetAllProducts());
+        }
+        
+        [HttpGet("{categoryUrl}")]
+        public async Task<ActionResult<List<Product>>>  GetProductsByCategory(string categoryUrl)
+        {
+            return Ok(await _productService.GetProductsByCategory(categoryUrl));
         }
     }
 }

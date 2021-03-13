@@ -1,4 +1,5 @@
-﻿using AyacOnlineStore.Shared;
+﻿using AyacOnlineStore.Server.Services.CategoryService;
+using AyacOnlineStore.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +9,26 @@ namespace AyacOnlineStore.Server.Services.ProductService
 {   
     public class ProductService : IProductService
     {
+        private readonly ICategoryService _categoryService;
+
+        public ProductService(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
         public async Task<List<Product>> GetAllProducts()
         {
             return Products;
         }
 
-        public async Task<List<Product>> GetAllProductsByCategory(string categoryUrl)
+        public async Task<List<Product>> GetProduct (int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<Product>> GetProduct(int id)
+        public async Task<List<Product>> GetProductsByCategory(string categoryUrl)
         {
-            throw new NotImplementedException();
+            Category category = await _categoryService.GetCategoryByUrl(categoryUrl);
+            return Products.Where(p => p.CategoryId == category.Id).ToList();
         }
 
         public List<Product> Products { get; set; } = new List<Product>

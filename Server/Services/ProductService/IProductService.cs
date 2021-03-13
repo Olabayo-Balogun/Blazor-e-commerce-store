@@ -9,7 +9,7 @@ namespace AyacOnlineStore.Server.Services.ProductService
     public interface IProductService
     {
         Task<List<Product>> GetAllProducts();
-        Task<List<Product>> GetAllProductsByCategory(string categoryUrl);
         Task<List<Product>> GetProduct(int id);
+        Task<List<Product>> GetProductsByCategory(string categoryUrl);
     }
 }
