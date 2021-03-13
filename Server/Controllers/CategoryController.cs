@@ -1,4 +1,5 @@
-﻿using AyacOnlineStore.Shared;
+﻿using AyacOnlineStore.Server.Services.CategoryService;
+using AyacOnlineStore.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,17 +13,17 @@ namespace AyacOnlineStore.Server.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
+        private readonly ICategoryService _categoryService;
+
+        public CategoryController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<Category>>> GetCategories()
         {
-            return Ok(new List<Category>
-            {
-               new Category { Id = 1, Name = "Cereals", Url = "cereals", Icon = "cereals" },
-               new Category { Id = 2, Name = "Fruits", Url = "fruits", Icon = "fruits" },
-               new Category { Id = 3, Name = "Oils", Url = "oils", Icon = "oils" },
-               new Category { Id = 4, Name = "Poultry", Url = "poultry", Icon = "poultry" },
-               new Category { Id = 5, Name = "Vegetables", Url = "vegetables", Icon = "vegetables" }
-            });
+            return Ok(await _categoryService.GetCategories() );
         }
     }
 }
