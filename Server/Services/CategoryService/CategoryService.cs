@@ -18,7 +18,7 @@ namespace AyacOnlineStore.Server.Services.CategoryService
         };
         public async Task<List<Category>> GetCategories()
         {
-            return Categories;
+            return Categories; 
         }
 
         public async Task<Category> GetCategoryByUrl(string categoryUrl)
