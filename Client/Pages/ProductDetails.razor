@@ -15,32 +15,29 @@
 
         <p> @product.Description</p>
 
-        @if (product.PurchaseOptions != null && product.PurchaseOptions.Count > 0 ){
-            <div class="form-group">
+        @if (product.Variants != null && product.Variants.Count > 1 ){
+            <div class="form-group" @bind-="currentPurchaseOptionId">
                 <select class="form-control">
-                    @foreach (var purchaseOption in product.PurchaseOptions){
-                        <option>@purchaseOption.Name</option>
+                    @foreach (var variant in product.Variants){
+                        <option value="@variant.PurchaseOptionId">@variant.PurchaseOption.Name</option>
                     }
                 </select>
             </div>
         }
 
-        @if (product.OriginalPrice > product.Price)
-
+        @if(GetSelectedVariant() != null)
         {
+            @if (GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
 
-            <h6 class="text-muted original-price">
-
-                &#x20A6;@product.OriginalPrice
-
-            </h6>
-
-            <h4 class="price">
-
-                &#x20A6;@product.Price
-
-            </h4>
-
+            {
+                <h6 class="text-muted original-price">
+                    &#x20A6;@GetSelectedVariant().OriginalPrice
+                </h6>
+            }
+                <h4 class="price">
+                    &#x20A6;@GetSelectedVariant().Price
+                </h4>
+        }
             <button class="btn btn-primary">
 
                 <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
@@ -57,11 +54,23 @@
 @code {
     private Product product = new Product();
 
+    private int currentPurchaseOptionId = 1;
+
     [Parameter]
     public int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         product = await ProductService.GetProduct(Id);
-    }   
+        if(product.Variants.Count > 0)
+        {
+            currentPurchaseOptionId = product.Variants[0].PurchaseOptionId;
+        }
+    }
+
+    private ProductVariant GetSelectedVariant()
+    {
+        var variant = product.Variants.FirstOrDefault(v => v.PurchaseOptionId == currentPurchaseOptionId);
+        return variant;
+    }
 }

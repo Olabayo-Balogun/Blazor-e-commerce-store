@@ -16,32 +16,38 @@
                     </h4>
                 </a>
                 <p>@product.Description</p>
-                @if (product.OriginalPrice > product.Price)
-                {
-                    <h6 class="text-muted original-price">
-                        &#8358;@product.OriginalPrice
-                    </h6>
-                    <h5 class="price">
-                        &#x20A6; @product.Price
-                    </h5>
-                }
+               <h5 class="price">
+                        @GetPriceText(product);
+                </h5>
+                
             </div>
         </li>
     }
 </ul>
 
 @code {   
-    //[Parameter]
-    //public int? CategoryId { get; set; } = null;
-
     protected override void OnInitialized()
     {
-        //  await ProductService.LoadProducts();
         ProductService.OnChange += StateHasChanged;
     }
 
     public void Dispose()
     {
         ProductService.OnChange -= StateHasChanged;
+    }
+
+    private string GetPriceText(Product product)
+    {
+        var variants = product.Variants;
+        if (variants.Count == 0)
+        {
+            return string.Empty;
+        }
+        else if(variants.Count == 1)
+        {
+            return $"&#x20A6;{variants[0].Price}";
+        }
+        decimal minPrice = variants.Min(v => v.Price);
+        return $"Prices as low as &#x20A6;{minPrice}";
     }
 }
