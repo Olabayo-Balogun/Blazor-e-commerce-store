@@ -149,6 +149,47 @@ namespace AyacOnlineStore.Server.Data
                      DateCreated = new DateTime(2021, 3, 5)
                  }
             );
+
+            modelBuilder.Entity<PurchaseOption>().HasData(
+               new PurchaseOption { Id = 1, Name = "Bunch(Ripe)" },
+               new PurchaseOption { Id = 2, Name = "Bunch(Unripe)" },
+               new PurchaseOption { Id = 3, Name = "Cob" },
+               new PurchaseOption { Id = 4, Name = "Crate" },
+               new PurchaseOption { Id = 5, Name = "Kg" },
+               new PurchaseOption { Id = 6, Name = "Litres" },
+               new PurchaseOption { Id = 7, Name = "Units" },
+               new PurchaseOption { Id = 8, Name = "Units(Ripe)" },
+               new PurchaseOption { Id = 9, Name = "Units(Unripe)" }
+           );
+
+            modelBuilder.SharedTypeEntity<Dictionary<string, object>>("ProductPurchaseOption").HasData(
+               new { ProductsId = 1, PurchaseOptionsId = 1 },
+               new { ProductsId = 6, PurchaseOptionsId = 1 },
+               new { ProductsId = 1, PurchaseOptionsId = 2 },
+               new { ProductsId = 6, PurchaseOptionsId = 2 },
+               new { ProductsId = 2, PurchaseOptionsId = 3 },
+               new { ProductsId = 3, PurchaseOptionsId = 4 },
+               new { ProductsId = 2, PurchaseOptionsId = 5 },
+               new { ProductsId = 5, PurchaseOptionsId = 5 },
+               new { ProductsId = 7, PurchaseOptionsId = 5 },
+               new { ProductsId = 8, PurchaseOptionsId = 5 },
+               new { ProductsId = 9, PurchaseOptionsId = 5 },
+               new { ProductsId = 10, PurchaseOptionsId = 6 },
+               new { ProductsId = 4, PurchaseOptionsId = 6 },
+               new { ProductsId = 1, PurchaseOptionsId = 7 },
+               new { ProductsId = 2, PurchaseOptionsId = 7 },
+               new { ProductsId = 3, PurchaseOptionsId = 7 },
+               new { ProductsId = 5, PurchaseOptionsId = 7 },
+               new { ProductsId = 6, PurchaseOptionsId = 7 },
+               new { ProductsId = 8, PurchaseOptionsId = 7 },
+               new { ProductsId = 9, PurchaseOptionsId = 7 },
+               new { ProductsId = 1, PurchaseOptionsId = 8 },
+               new { ProductsId = 6, PurchaseOptionsId = 8 },
+               new { ProductsId = 1, PurchaseOptionsId = 9 },
+               new { ProductsId = 6, PurchaseOptionsId = 9 }
+           );
+
+
         }
     }
 }
