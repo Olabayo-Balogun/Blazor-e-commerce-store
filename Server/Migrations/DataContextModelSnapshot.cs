@@ -253,6 +253,36 @@ namespace AyacOnlineStore.Server.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AyacOnlineStore.Shared.PurchaseOption", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PurchaseOptions");
+                });
+
+            modelBuilder.Entity("ProductPurchaseOption", b =>
+                {
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PurchaseOptionsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductsId", "PurchaseOptionsId");
+
+                    b.HasIndex("PurchaseOptionsId");
+
+                    b.ToTable("ProductPurchaseOption");
+                });
+
             modelBuilder.Entity("AyacOnlineStore.Shared.Product", b =>
                 {
                     b.HasOne("AyacOnlineStore.Shared.Category", "Category")
@@ -262,6 +292,21 @@ namespace AyacOnlineStore.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ProductPurchaseOption", b =>
+                {
+                    b.HasOne("AyacOnlineStore.Shared.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AyacOnlineStore.Shared.PurchaseOption", null)
+                        .WithMany()
+                        .HasForeignKey("PurchaseOptionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
