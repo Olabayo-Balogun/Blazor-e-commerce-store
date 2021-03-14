@@ -21,8 +21,8 @@ namespace AyacOnlineStore.Shared
         public bool IsDeleted { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }
-        public DateTime DateCreated { get; set; } = DateTime.Now;
-        public DateTime DateUpdated { get; set; }
+        public DateTime? DateCreated { get; set; } = DateTime.Now;
+        public DateTime? DateUpdated { get; set; }
 
 
     }
