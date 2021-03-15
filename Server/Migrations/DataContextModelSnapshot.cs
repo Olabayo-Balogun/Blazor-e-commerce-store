@@ -265,14 +265,14 @@ namespace AyacOnlineStore.Server.Migrations
                         new
                         {
                             ProductId = 1,
-                            PurchaseOptionId = 8,
+                            PurchaseOptionId = 9,
                             OriginalPrice = 100m,
                             Price = 19.99m
                         },
                         new
                         {
                             ProductId = 1,
-                            PurchaseOptionId = 9,
+                            PurchaseOptionId = 10,
                             OriginalPrice = 100m,
                             Price = 19.99m
                         },

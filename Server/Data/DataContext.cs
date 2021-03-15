@@ -148,13 +148,6 @@ namespace AyacOnlineStore.Server.Data
                 new ProductVariant
                 {
                     ProductId = 1,
-                    PurchaseOptionId = 1,
-                    OriginalPrice = 100m,
-                    Price = 19.99m
-                },
-                new ProductVariant
-                {
-                    ProductId = 1,
                     PurchaseOptionId = 2,
                     Price = 199.99m,
                     OriginalPrice = 400m,
@@ -168,24 +161,17 @@ namespace AyacOnlineStore.Server.Data
                 new ProductVariant
                 {
                     ProductId = 1,
-                    PurchaseOptionId = 8,
-                    OriginalPrice = 100m,
-                    Price = 19.99m
-                },
-                new ProductVariant
-                {
-                    ProductId = 1,
                     PurchaseOptionId = 9,
                     OriginalPrice = 100m,
                     Price = 19.99m
                 },
                 new ProductVariant
                 {
-                ProductId = 2,
-                     PurchaseOptionId = 1,
-                     Price = 29.99m,
-                     OriginalPrice = 50m,
-                 },
+                    ProductId = 1,
+                    PurchaseOptionId = 10,
+                    OriginalPrice = 100m,
+                    Price = 19.99m
+                },
                 new ProductVariant
                  {
                      ProductId = 2,
@@ -232,13 +218,6 @@ namespace AyacOnlineStore.Server.Data
                 new ProductVariant
                  {
                      ProductId = 5,
-                     PurchaseOptionId = 1,
-                     OriginalPrice = 50m,
-                     Price = 19.99m
-                 },
-                new ProductVariant
-                 {
-                     ProductId = 5,
                      PurchaseOptionId = 6,
                      OriginalPrice = 200m,
                      Price = 99.99m
@@ -249,13 +228,6 @@ namespace AyacOnlineStore.Server.Data
                       ProductId = 5,
                       PurchaseOptionId = 8,
                       OriginalPrice = 50m,
-                      Price = 19.99m
-                  },
-                new ProductVariant
-                  {
-                      ProductId = 6,
-                      PurchaseOptionId = 1,
-                      OriginalPrice = 100m,
                       Price = 19.99m
                   },
                 new ProductVariant
@@ -302,31 +274,17 @@ namespace AyacOnlineStore.Server.Data
                 new ProductVariant
                     {
                         ProductId = 8,
-                        PurchaseOptionId = 1,
-                        OriginalPrice = 200m,
-                        Price = 49.99m
-                    },
-                new ProductVariant
-                    {
-                        ProductId = 8,
                         PurchaseOptionId = 6,
                         OriginalPrice = 7000m,
                         Price = 1000m
                     },
                 new ProductVariant
-                    {
-                        ProductId = 8,
-                        PurchaseOptionId = 8,
-                        OriginalPrice = 200m,
-                        Price = 49.99m
-                    },
-                new ProductVariant
-                    {
-                        ProductId = 9,
-                        PurchaseOptionId = 1,
-                        OriginalPrice = 100m,
-                        Price = 49.99m
-                    },
+                {
+                    ProductId = 8,
+                    PurchaseOptionId = 8,
+                    OriginalPrice = 200m,
+                    Price = 49.99m
+                },
                 new ProductVariant
                     {
                         ProductId = 9,

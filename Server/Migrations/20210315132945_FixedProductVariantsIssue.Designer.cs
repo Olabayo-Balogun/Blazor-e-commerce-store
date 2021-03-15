@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AyacOnlineStore.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210314220744_UndidFixedProductVariants")]
-    partial class UndidFixedProductVariants
+    [Migration("20210315132945_FixedProductVariantsIssue")]
+    partial class FixedProductVariantsIssue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -267,14 +267,14 @@ namespace AyacOnlineStore.Server.Migrations
                         new
                         {
                             ProductId = 1,
-                            PurchaseOptionId = 8,
+                            PurchaseOptionId = 9,
                             OriginalPrice = 100m,
                             Price = 19.99m
                         },
                         new
                         {
                             ProductId = 1,
-                            PurchaseOptionId = 9,
+                            PurchaseOptionId = 10,
                             OriginalPrice = 100m,
                             Price = 19.99m
                         },

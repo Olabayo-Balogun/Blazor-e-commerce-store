@@ -45,9 +45,9 @@
         }
         else if(variants.Count == 1)
         {
-            return $"#{variants[0].Price}";
+            return $"₦{variants[0].Price}";
         }
         decimal minPrice = variants.Min(v => v.Price);
-        return $"Prices as low as #{minPrice}";
+        return $"Prices as low as ₦{minPrice}";
     }
 }

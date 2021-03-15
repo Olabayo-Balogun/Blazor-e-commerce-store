@@ -16,8 +16,8 @@
         <p> @product.Description</p>
 
         @if (product.Variants != null && product.Variants.Count > 1 ){
-            <div class="form-group" @bind-="currentPurchaseOptionId">
-                <select class="form-control">
+            <div class="form-group">
+                <select class="form-control" @bind="currentPurchaseOptionId">
                     @foreach (var variant in product.Variants){
                         <option value="@variant.PurchaseOptionId">@variant.PurchaseOption.Name</option>
                     }
