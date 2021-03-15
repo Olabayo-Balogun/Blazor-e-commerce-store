@@ -40,5 +40,51 @@ namespace AyacOnlineStore.Client.Services.CartService
 
             OnChange.Invoke();
         }
+
+        public async Task<List<CartItem>> GetCartItems()
+        {
+            var result = new List<CartItem>();
+            var cart = await _localStorage.GetItemAsync<List<ProductVariant>>("cart");
+            if (cart == null)
+            {
+                return result;
+            }
+
+            foreach (var item in cart)
+            {
+                var product = await _productService.GetProduct(item.ProductId);
+                var cartItem = new CartItem
+                {
+                    ProductId = product.Id,
+                    ProductTitle = product.Title,
+                    Image = product.Image,
+                    PurchaseOptionId = item.PurchaseOptionId
+                };
+
+                var variant = product.Variants.Find(v => v.PurchaseOptionId == item.PurchaseOptionId);
+                if (variant != null)
+                {
+                    cartItem.PurchaseOptionName = variant.PurchaseOption?.Name;
+                    cartItem.Price = variant.Price;
+                }
+                result.Add(cartItem);
+            }
+            return result;
+        }
+
+        public async Task DeleteItem(CartItem item)
+        {
+            var cart = await _localStorage.GetItemAsync<List<ProductVariant>>("cart");
+            if (cart == null)
+            { 
+                return;
+            }
+
+            var cartItem = cart.Find(x => x.ProductId == item.ProductId && x.PurchaseOptionId == item.PurchaseOptionId);
+            cart.Remove(cartItem);
+
+            await _localStorage.SetItemAsync("cart", cart);
+            OnChange.Invoke();
+        }
     }
 }
