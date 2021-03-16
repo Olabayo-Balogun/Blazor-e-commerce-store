@@ -1,6 +1,7 @@
 using AyacOnlineStore.Server.Data;
 using AyacOnlineStore.Server.Services.CategoryService;
 using AyacOnlineStore.Server.Services.ProductService;
+using AyacOnlineStore.Server.Services.StatisticsService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,7 @@ namespace AyacOnlineStore.Server
             services.AddRazorPages();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
