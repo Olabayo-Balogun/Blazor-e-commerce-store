@@ -3,6 +3,7 @@ using AyacOnlineStore.Client.Services.CategoryService;
 using AyacOnlineStore.Client.Services.ProductService;
 using Blazored.LocalStorage;
 using Blazored.Toast;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,9 @@ namespace AyacOnlineStore.Client
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredToast();
+            builder.Services.AddOptions();
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomerAuthorizationStateProvider>();
 
             await builder.Build().RunAsync();
         }
