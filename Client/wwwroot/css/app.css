@@ -31,8 +31,8 @@ a, .btn-link {
 }
 
 .media-img {
-    max-width: 12.5rem;
-    max-height: 12.5rem;
+    max-width: 12rem;
+    max-height: 12rem;
     border-radius: 6px;
     margin-bottom: 1rem;
     transition: transform .2s;

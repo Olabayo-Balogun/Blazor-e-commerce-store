@@ -14,36 +14,12 @@ else
 {
     <AuthorizeView>
         <NotAuthorized>
-            <h1>Welcome to Ayac Agric Store!</h1>
+            <h1>Welcome to The Lagos Market!</h1>
         </NotAuthorized>
         <Authorized>
-            <h1>Welcome back to Ayac Agric Store @LocalStorage.GetItemAsString("username")!</h1>
+            <h1>Welcome back to The Lagos Market @LocalStorage.GetItemAsString("username")!</h1>
         </Authorized>
     </AuthorizeView>
     <ProductList />
 }
 
-
-@code{
-    [Parameter]
-    public string CategoryUrl { get; set; }
-
-    private Category category = null;
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await ProductService.LoadProducts(CategoryUrl);
-
-        if (CategoryUrl != null)
-        {
-            category = CategoryService.Categories.FirstOrDefault(c => c.Url.ToLower().Equals(CategoryUrl.ToLower()));
-        }
-        else
-        {
-            category = null;
-        }
-
-        await StatisticsService.IncrementVisits();
-        await StatisticsService.GetVisits();
-    }
-}
