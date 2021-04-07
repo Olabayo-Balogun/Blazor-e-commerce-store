@@ -27,6 +27,9 @@ namespace AyacOnlineStore.Server.Services.ProductService
         public async Task<Product> GetProduct (int id)
         {
             Product product = await _context.Products.Include(p => p.Variants).ThenInclude(v => v.PurchaseOption).FirstOrDefaultAsync(p => p.Id == id);
+            product.Views++;
+
+            await _context.SaveChangesAsync();
             return product; 
         }
 
