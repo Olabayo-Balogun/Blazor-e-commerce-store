@@ -9,6 +9,9 @@ namespace AyacOnlineStore.Client.Pages
     public partial class Cart
     {
         List<CartItem> cartItems = new List<CartItem>();
+
+        bool orderPlaced = false;
+
         protected override async Task OnInitializedAsync()
         {
             cartItems = await CartService.GetCartItems();
@@ -18,6 +21,11 @@ namespace AyacOnlineStore.Client.Pages
         {
             await CartService.DeleteItem(item);
             cartItems = await CartService.GetCartItems();
+        }
+        private async Task PlaceOrder()
+        {
+            orderPlaced = true;
+            await CartService.EmptyCart();
         }
     }
 }

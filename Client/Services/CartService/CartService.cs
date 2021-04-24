@@ -1,4 +1,5 @@
-﻿using AyacOnlineStore.Client.Services.ProductService;
+﻿
+using AyacOnlineStore.Client.Services.ProductService;
 using AyacOnlineStore.Shared;
 using Blazored.LocalStorage;
 using Blazored.Toast.Services;
@@ -24,18 +25,27 @@ namespace AyacOnlineStore.Client.Services.CartService
             _productService = productService;
         }
 
-        public async Task AddToCart(ProductVariant productVariant)
+        public async Task AddToCart(CartItem item)
         {
-            var cart = await _localStorage.GetItemAsync<List<ProductVariant>>("cart");
+            var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
             if (cart == null)
             {
-                cart = new List<ProductVariant>();
+                cart = new List<CartItem>();
             }
 
-            cart.Add(productVariant);
+            var sameItem = cart.Find(x => x.ProductId == item.ProductId && x.PurchaseOptionId == item.PurchaseOptionId);
+            if (sameItem == null)
+            {
+                cart.Add(item);
+            }
+            else
+            {
+                sameItem.Quantity += item.Quantity;
+            }
+
             await _localStorage.SetItemAsync("cart", cart);
 
-            var product = await _productService.GetProduct(productVariant.ProductId);
+            var product = await _productService.GetProduct(item.ProductId);
             _toastService.ShowSuccess(product.Title, "Added to your shopping cart:");
 
             OnChange.Invoke();
@@ -43,38 +53,18 @@ namespace AyacOnlineStore.Client.Services.CartService
 
         public async Task<List<CartItem>> GetCartItems()
         {
-            var result = new List<CartItem>();
-            var cart = await _localStorage.GetItemAsync<List<ProductVariant>>("cart");
+            var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
             if (cart == null)
             {
-                return result;
+                return new List<CartItem>();
             }
 
-            foreach (var item in cart)
-            {
-                var product = await _productService.GetProduct(item.ProductId);
-                var cartItem = new CartItem
-                {
-                    ProductId = product.Id,
-                    ProductTitle = product.Title,
-                    Image = product.Image,
-                    PurchaseOptionId = item.PurchaseOptionId
-                };
-
-                var variant = product.Variants.Find(v => v.PurchaseOptionId == item.PurchaseOptionId);
-                if (variant != null)
-                {
-                    cartItem.PurchaseOptionName = variant.PurchaseOption?.Name;
-                    cartItem.Price = variant.Price;
-                }
-                result.Add(cartItem);
-            }
-            return result;
+            return cart;
         }
 
         public async Task DeleteItem(CartItem item)
         {
-            var cart = await _localStorage.GetItemAsync<List<ProductVariant>>("cart");
+            var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
             if (cart == null)
             { 
                 return;
@@ -86,5 +76,12 @@ namespace AyacOnlineStore.Client.Services.CartService
             await _localStorage.SetItemAsync("cart", cart);
             OnChange.Invoke();
         }
+
+        public async Task EmptyCart()
+        {
+            await _localStorage.RemoveItemAsync("cart");
+            OnChange.Invoke();
+        }
+
     }
 }

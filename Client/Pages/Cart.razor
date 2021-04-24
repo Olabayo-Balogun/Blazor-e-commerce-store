@@ -1,14 +1,16 @@
 ﻿@page "/cart"
 @inject ICartService CartService
 
-<h3>Shopping Cart</h3>
+@if (!orderPlaced)
+{
+    <h3>Shopping Cart</h3>
 
-@if (cartItems == null || cartItems.Count <= 0)
+    @if (cartItems == null || cartItems.Count <= 0)
     {
-            <span>You have no items in your shoping cart.</span>
-}
-else
-        {
+        <span>You have no items in your shoping cart.</span>
+    }
+    else
+    {
 <div>
     @foreach (var item in cartItems)
     {
@@ -18,24 +20,64 @@ else
                 <div class="item-name">
                     <h5>
                         <a href="/product/@item.ProductId">@item.ProductTitle</a>
-                        <span>@item.PurchaseOptionName</span><br />
-                        <button class="btn-delete" @onclick="@(() => DeleteItem(item))">
-                            Delete
-                        </button>
                     </h5>
+                    <span>@item.PurchaseOptionName</span><br />
+                    <button class="btn-delete" @onclick="@(() => DeleteItem(item))">
+                        Delete
+                    </button>
+                    <EditForm Model="item">
+                        <div class="form-group ">
+                            <InputNumber @bind-Value="item.Quantity" class="form-control" style="width: 7rem;" />
+                        </div>
+                    </EditForm>
                 </div>
                 <div class="item-price">
-                    ₦@item.Price
+                    ₦@(item.Price * item.Quantity)
                 </div>
+
             </div>
         </div>
     }
     <div class="item-price">
-        Total (@cartItems.Count): ₦@cartItems.Sum(item => item.Price)
+        Total (@cartItems.Count): ₦@cartItems.Sum(item => item.Price * item.Quantity)
+    </div>
+    <div style="text-align: center; margin-top: 0.8rem;">
+        <button class="btn btn-primary btn-lg" @onclick="PlaceOrder">
+            Place Order
+        </button>
     </div>
     <form>
         <button class="btn btn-primary" type="button" @onClick="makePayment()">Pay Now</button>
     </form>
 </div>
+    }
+}
+else
+{
+    <h3>Thank you for your order!</h3>
+    <h4>Here's what you'll get: </h4>
+    <div>
+        @foreach (var item in cartItems)
+        {
+            <div class="item-container">
+                <div class="item-image-wrapper">
+                    <img src="@item.Image" class="item-image" />
+                    <div class="item-name">
+                        <h5>
+                            <a href="/product/@item.ProductId">@item.ProductTitle</a>
+                        </h5>
+                    </div>
+                    <div class="item-price">
+                        ₦@(item.Price * item.Quantity)
+                    </div>
+                </div>
+            </div>
         }
-
+        <div class="item-price">
+            Total (@cartItems.Count): ₦@cartItems.Sum(item => item.Price * item.Quantity)
+        </div>
+        <form>
+            <button class="btn btn-primary" type="button" @onClick="makePayment()">Pay Now</button>
+        </form>
+    </div>
+}

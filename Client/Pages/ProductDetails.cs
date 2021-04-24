@@ -13,6 +13,8 @@ namespace AyacOnlineStore.Client.Pages
 
         private int currentPurchaseOptionId = 1;
 
+        private CartItem cartItem = new CartItem { Quantity = 1 };
+
         [Parameter]
         public int Id { get; set; }
 
@@ -33,7 +35,36 @@ namespace AyacOnlineStore.Client.Pages
 
         private async Task AddToCart()
         {
-            await CartService.AddToCart(GetSelectedVariant());
+            var productVariant = GetSelectedVariant();
+            cartItem.PurchaseOptionId = productVariant.PurchaseOptionId;
+            cartItem.PurchaseOptionName = productVariant.PurchaseOption.Name;
+            cartItem.Image = product.Image;
+            cartItem.Price = productVariant.Price;
+            cartItem.ProductId = productVariant.ProductId;
+            cartItem.ProductTitle = product.Title;
+
+
+            await CartService.AddToCart(cartItem);
+        }
+
+        private string GetViewString()
+        {
+            if(product.Views > 1000000)
+            {
+                return $"{((float)product.Views / 1000000).ToString("#.##")}M";
+            }
+            else if (product.Views > 100000)
+            {
+                return $"{((float)product.Views / 1000).ToString("#")}k";
+            }
+            else if (product.Views > 1000)
+            {
+                return $"{((float)product.Views / 1000).ToString("#.##")}K";
+            }
+            else
+            {
+                return product.Views.ToString("0##");
+            }
         }
     }
 }

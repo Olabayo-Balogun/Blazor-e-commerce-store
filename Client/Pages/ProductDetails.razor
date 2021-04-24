@@ -5,7 +5,7 @@
 @inject IToastService ToastService
 
 <div class="views">
-    <i class="oi oi-eye"></i> @product.Views.ToString("0##")
+    <i class="oi oi-eye"></i> @GetViewString()
 </div>
 
 <div class="media">
@@ -45,11 +45,16 @@
                     ₦@GetSelectedVariant().Price
                 </h4>
         }
-            <button class="btn btn-primary" @onclick="AddToCart">
+        <EditForm Model="cartItem">
+            <div class="form-group ">
+                <InputNumber @bind-Value="cartItem.Quantity" class="form-control" style="width: 7rem;"/>
+            </div>
+        </EditForm>
+        <button class="btn btn-primary" @onclick="AddToCart">
 
-                <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
+            <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
 
-            </button>
+        </button>
     </div>
 
 </div>
