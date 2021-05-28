@@ -18,7 +18,7 @@ namespace AyacOnlineStore.Client.Pages
         [Parameter]
         public int Id { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
             product = await ProductService.GetProduct(Id);
             if (product.Variants.Count > 0)
@@ -43,7 +43,10 @@ namespace AyacOnlineStore.Client.Pages
             cartItem.ProductId = productVariant.ProductId;
             cartItem.ProductTitle = product.Title;
 
-
+           if(cartItem.Quantity < 1)
+            {
+                return;
+             }
             await CartService.AddToCart(cartItem);
         }
 

@@ -11,5 +11,6 @@ namespace AyacOnlineStore.Server.Services.ProductService
         Task<List<Product>> GetAllProducts();
         Task<Product> GetProduct(int id);
         Task<List<Product>> GetProductsByCategory(string categoryUrl);
+        Task<List<Product>> SearchProducts(string searchText);
     }
 }

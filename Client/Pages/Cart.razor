@@ -28,6 +28,10 @@
                     <EditForm Model="item">
                         <div class="form-group ">
                             <InputNumber @bind-Value="item.Quantity" class="form-control" style="width: 7rem;" />
+                            @if (item.Quantity < 1)
+                            {
+                                return;
+                            }
                         </div>
                     </EditForm>
                 </div>
@@ -43,6 +47,7 @@
     </div>
     <div style="text-align: center; margin-top: 0.8rem;">
         <button class="btn btn-primary btn-lg" @onclick="PlaceOrder">
+
             Place Order
         </button>
     </div>

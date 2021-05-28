@@ -1,6 +1,20 @@
 ﻿@inject ISyncLocalStorageService LocalStorage
 @inject ICartService CartService
+@inject IProductService ProductService
+@inject NavigationManager NavigationManager
 @implements IDisposable 
+
+<BlazoredTypeahead SearchMethod="@SearchProduct" TValue="Product" TItem="Product" Value="selectedProduct" ValueChanged="HandleSearch" ValueExpression="@(() => selectedProduct)" placeholder ="You can search for your products by name, category or description">
+    <SelectedTemplate>
+        @context.Title
+    </SelectedTemplate>
+    <ResultTemplate>
+        @context.Title
+    </ResultTemplate>
+    <NotFoundTemplate>
+        My apologies, there weren't any products found.
+    </NotFoundTemplate>
+</BlazoredTypeahead>
 
 <a href="cart" class="btn btn-info">
         <i class="oi oi-cart"></i>
